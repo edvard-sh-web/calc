@@ -2,10 +2,10 @@ let displayValue = document.querySelector("#output");
 let lastCalc = document.querySelector("#last-calc")
 let operatorPressed = false
 let equalsPressed = false
+let tempForLastCalc;
 
 displayValue.textContent = "";
 let n1, n2, operator;
-console.log(displayValue.offsetWidth);
 let digits = document.querySelectorAll(".digit");
 digits.forEach((el) => {
   el.addEventListener("click", () => {
@@ -40,7 +40,8 @@ let operators = document.querySelectorAll(".operator");
 operators.forEach((el) => {
   el.addEventListener("click", () => {
     if(operatorPressed && displayValue.textContent !== ""){
-     
+      tempForLastCalc = Number.parseFloat(lastCalc.textContent)
+      // if(divisionByZero){return}
       lastCalc.textContent = operate(Number.parseFloat(lastCalc.textContent), Number.parseFloat(displayValue.textContent), operator) 
                               + " " + el.textContent
       displayValue.textContent = ""
@@ -59,6 +60,16 @@ operators.forEach((el) => {
     equalsPressed = false
   });
 });
+
+function divisionByZero (n2) {
+  if(n2 === 0 && operator === "÷"){
+    lastCalc.textContent = tempForLastCalc
+    displayValue.textContent = ""
+    alert("Can't do that, buddy"); 
+
+    return true
+  }
+}
 
 function popDisplay(el) {
 
@@ -97,7 +108,7 @@ document.querySelector(".equals").addEventListener("click", () => {
   }
   equalsPressed = true
   displayValue.textContent = Math.round(operate(n1, n2, operator)* 1000000) /  1000000
-
+  if(displayValue.textContent === "NaN"){displayValue.textContent = ""}
 
   
 })
@@ -117,6 +128,17 @@ function divide(n1, n2) {
 }
 
 function operate(n1, n2, operator) {
+  if(n2 === 0 && operator === "÷"){
+    alert("How dare you..."); 
+    
+      console.log(tempForLastCalc)
+      displayValue.textContent = ""; 
+      lastCalc.textContent = tempForLastCalc;
+      popLastCalc(tempForLastCalc, operator)
+      console.log(lastCalc.textContent)
+
+    
+    return}
   switch (operator) {
     case "+":
       return add(n1, n2);

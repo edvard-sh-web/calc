@@ -3,9 +3,7 @@ body {
   color: white;
   font-family: "Orbitron", sans-serif;
 }
-button,
-input[type="submit"],
-input[type="reset"] {
+button {
   background: none;
   color: inherit;
   border: none;
@@ -16,11 +14,13 @@ input[type="reset"] {
 }
 
 #calc-container {
-  /* height: 100vh; */
+  height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 #calc {
+  align-self: center;
   min-width: 300px;
   height: 570px;
   background-color: #111111;
@@ -43,9 +43,7 @@ input[type="reset"] {
   color: #c1c1c1;
   font-size: 18px;
 }
-#operator {
 
-}
 #output-contanier {
   background-color: #1c1c1c;
   height: 20%;
